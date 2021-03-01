@@ -1,2 +1,2 @@
-# github-activity-tracker
-Github activity tracker
+# Repository Activity Tracker
+

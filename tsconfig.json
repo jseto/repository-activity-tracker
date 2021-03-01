@@ -1,0 +1,22 @@
+{
+  "compileOnSave": false,
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS",
+    }
+  },
+  "compilerOptions": {
+    "target": "es5", // usamos es5 para tener compatibilidad con navegadores antiguos
+    "module": "ESNext", // generation de código de modulo conforme a la ultima versión
+    "moduleResolution": "node", // resover módulos conforme a NodeJS puesto que lo usaremos tanto en Jest como en Webpack
+    "esModuleInterop": true, // permite usar sintaxis de módulos es6
+    "sourceMap": true, // generar mapas de código para facilitar la depuración de errores
+    "outDir": "./out", // solo para cuando invocamos tsc sin parametros
+		"resolveJsonModule": true, // permite importar json como un módulo
+    "lib": [
+      "esnext", "dom" // permitir las características más recientes de JS y el DOM
+    ],
+    "experimentalDecorators": true,
+    "jsx": "react"
+	}
+}
