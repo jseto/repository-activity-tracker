@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npm run server & webpack serve",
     "build": "webpack --mode=production",
-    "server": "ts-node ./server/server.ts",
+    "server": "ts-node ./src/back-end/server.ts",
     "test": "jest",
     "debug": "node --inspect-brk node_modules/.bin/jest --runInBand --coverage false"
   },
