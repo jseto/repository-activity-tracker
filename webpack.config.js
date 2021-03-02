@@ -5,7 +5,7 @@ module.exports = ( env, arg ) => {
 	return {
 		mode: 'development',
 		entry: {
-			'repository-activity-tracker': './front-end/src/index.tsx'
+			'repository-activity-tracker': './src/front-end/index.tsx'
 		},
 		output: {
 			filename: '[name].main.js'
@@ -49,7 +49,7 @@ module.exports = ( env, arg ) => {
 				filename: 'repository-activity-tracker.css'
 			}),
 			new HtmlWebpackPlugin({
-				template: 'front-end/src/index.html',
+				template: 'src/front-end/index.html',
 				templateParameters: {
 					title: 'Repository Activity Tracker'
 				},
