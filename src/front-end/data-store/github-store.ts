@@ -3,13 +3,13 @@ import { Commit } from '../commit/commit';
 import { Organization } from '../organization/organization';
 import { Repository } from '../repository/repository';
 import { User } from '../user/user';
-import { GenericDataStore } from './data-store';
+import { RepoStore } from './data-store';
 
 type GithubObject = {
 	[ key: string ]: any
 }
 
-export class GithubStore extends GenericDataStore {
+export class GithubStore implements RepoStore {
 	static readonly endPoint = 'https://api.github.com'
 
 	getOrganization( name: string ): Promise<Organization> {
@@ -49,13 +49,32 @@ export class GithubStore extends GenericDataStore {
 			try {
 				const data: any[] = await this.apiCall( `/orgs/${ organization.name }/repos` )
 
-				resolve( data.map( ghRepo => {
-					const repo = this.createRepositoryFromGithub( ghRepo )
-					repo.organization = organization
-					return repo
-				}))
+				resolve( 
+					data.map( ghRepo => {
+						const repo = this.createRepositoryFromGithub( ghRepo )
+						repo.organization = organization
+						return repo
+					})
+					.sort( (repo1, repo2 ) => repo2.updated.getTime() - repo1.updated.getTime() )
+				)
 
 			} catch( error ) { reject( error ) }
+		})
+	}
+
+	public getContributors( repository: Repository ): Promise<User[]> {
+		return new Promise<User[]>( async ( resolve, reject )=>{
+			try {
+
+				const data: any[] = await this.apiCall( 
+					`/repos/${ repository.organization.name }/${ repository.name }/contributors` 
+				)
+
+				resolve(
+					data.map( ghContrib => this.createUserFromGithub( ghContrib ) )
+				)
+			}
+			catch ( error ) { reject( error ) }
 		})
 	}
 
@@ -104,6 +123,7 @@ export class GithubStore extends GenericDataStore {
 		repo.fullName = githubObj.full_name
 		repo.url = githubObj.home_url
 		repo.watchers = githubObj.watchers
+		repo.updated = new Date( githubObj.updated_at )
 
 		return repo
 	}
@@ -123,5 +143,16 @@ export class GithubStore extends GenericDataStore {
 		commit.author.reposUrl = commitAuthor?.repos_url
 
 		return commit
+	}
+
+	private createUserFromGithub( ghUser: GithubObject ): User {
+		const user = new User()
+
+		user.name = ghUser.login
+		user.avatar = ghUser.avatar_url
+		user.reposUrl = ghUser.repos_url
+		user.contributions = ghUser.contributions
+	
+		return user
 	}
 }
