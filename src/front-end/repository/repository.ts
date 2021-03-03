@@ -6,5 +6,5 @@ export class Repository {
 	organization: Organization
 	url: string
 	description: string
-	watchers: string
+	watchers: number
 }
