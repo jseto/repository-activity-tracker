@@ -13,11 +13,14 @@ export function ContributorCard({ contributor, maxContributions }: ContributorCa
 	
 	return (
 		<div className="contributor-card">
+
 			<img src={ contributor?.avatar }/>
 			<small>{ contributor?.name }</small>
+
 			<Gauge value={ contributor?.contributions } maxValue={ maxContributions }>
 				<HeartIcon width="1em" fill="red"/>
 			</Gauge>
+
 		</div>
 	)
 }

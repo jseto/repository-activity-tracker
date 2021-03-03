@@ -27,15 +27,19 @@ export class RepositoryPanel extends Component<RepositoryPanelProps, RepositoryP
 			<div className="repository-panel"
 				onClick={ () => !showDetails && this.setState({ showDetails: true }) }
 			>
+
 				{ showDetails
+
 					? <RepositoryDetails 
 							repository={ repository } 
 							onCloseModal={ ()=> this.setState(()=>({ showDetails: false })) }
 						/>
+					
 					: <div>
 							<RepositoryHeader repository={ repository } />
 							<a>More...</a>
 						</div>
+				
 				}
 			</div>
 		)

@@ -28,6 +28,7 @@ export class OrganizationPanel extends Component<{}, OrganizationPanelState> {
 
 		return (
 			<div className="organization-panel">
+
 				<input 
 					placeholder="Enter an organization to explore"
 					value={ organizationName }
@@ -44,8 +45,10 @@ export class OrganizationPanel extends Component<{}, OrganizationPanelState> {
 				<button onClick={ ()=>this.setApi() }>Set API key and Store</button>
 
 				{ error === ''
+
 					?	<OrganizationDetails organization={ organization }/>
 					: <p className="error">{ error }</p>
+				
 				}
 				
 			</div>

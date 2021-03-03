@@ -42,8 +42,11 @@ export class RepositoryDetails extends Component<RepositoryDetailsProps, Reposit
 
 		return (
 			<div className="repository-details modal-container">
+
 				<div className="commit-container modal full-screen darker">
+
 					<RepositoryHeader repository={ repository } />
+
 					<h3>Hall of fame</h3>
 					{
 						contributors.slice(0, 5).map( contributor =>
@@ -54,11 +57,15 @@ export class RepositoryDetails extends Component<RepositoryDetailsProps, Reposit
 							/>
 						)
 					}
+
 					<button onClick={ ()=> DataStore.instance.trackRepo( repository )}>
 						Track this repo
 					</button>
+
 					<h3>Commits:</h3>
+
 					<div className="commit-list">
+
 						<InfiniteScroll 
 							onBottomReached={ ()=>this.nextPage() } 
 							bottomGuardLabel="First Commit" 
@@ -71,11 +78,14 @@ export class RepositoryDetails extends Component<RepositoryDetailsProps, Reposit
 									))
 								}
 						</InfiniteScroll>
+
 					</div>
+
 					<button className="close-modal"
 						onClick={ ()=> onCloseModal && onCloseModal() }
 					>
 					</button>
+
 				</div>
 			</div>
 		)
@@ -102,11 +112,13 @@ interface RepositoryHeaderProps {
 export function RepositoryHeader({ repository }: RepositoryHeaderProps ) {
 	return (
 		<div className="repository-header">
+
 			<h3>{ repository?.name }</h3>
 			<strong>{ repository.fullName }</strong>
 			<p>{ repository?.description }</p>
 			<p>Last updated: { repository?.updated.toLocaleString() }</p>
 			<p>Watchers: { repository.watchers}</p>
+
 		</div>
 	)
 }
