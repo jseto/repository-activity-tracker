@@ -1,4 +1,5 @@
 import { Organization } from '../organization/organization'
+import { User } from '../user/user'
 
 export class Repository {
 	name: string
@@ -7,4 +8,6 @@ export class Repository {
 	url: string
 	description: string
 	watchers: number
+	updated: Date
+	contributors: User[]
 }

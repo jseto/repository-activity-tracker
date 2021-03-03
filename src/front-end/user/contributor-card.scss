@@ -1,0 +1,15 @@
+.contributor-card {
+	display: inline-block;
+	margin: 0.5em;
+	padding: 0.5em;
+	background-color: #637e7f;
+
+	> * {
+		display: block;
+	}
+
+	img {
+		max-width: 100px;
+		margin: 0.5em;
+	}
+}

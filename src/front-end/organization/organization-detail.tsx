@@ -16,8 +16,8 @@ export function OrganizationDetails( props: OrganizationDetailProps ) {
 			<div className="repository-list">
 				{
 					organization?.repositories.map( repo => (
-						<RepositoryPanel key={ repo.fullName } repository={ repo } />
-					))
+							<RepositoryPanel key={ repo.fullName } repository={ repo } />
+						))
 				}
 			</div>
 		</div>
