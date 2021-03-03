@@ -1,0 +1,24 @@
+@import "../main.scss";
+
+.repository-panel {
+	width: 25%;
+	background-color: cadetblue;
+	padding: 1em;
+	margin: 0.5em;
+
+	// @extend .modal;
+
+	.repository-details {
+		color: white;
+		padding: 1em;
+		margin: 0.5em;
+		// background-color: $modal-background-color;
+
+		// @extend .modal;
+		// @extend .full;
+
+		// .commit-container {
+		// 	@extend .modal-container
+		// }
+	}
+}

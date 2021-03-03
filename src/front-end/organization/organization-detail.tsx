@@ -9,15 +9,17 @@ interface OrganizationDetailProps {
 export function OrganizationDetails( props: OrganizationDetailProps ) {
 	const { organization } = props
 	return (
-		<div>
+		<div className="organization-details">
 			<img src={ organization?.avatar }/>
 			<h2>{ organization?.name }</h2>
 			<p>{ organization?.description }</p>
-			{
-				organization?.repositories.map( repo => (
-					<RepositoryPanel key={ repo.fullName } repository={ repo } />
-				))
-			}
+			<div className="repository-list">
+				{
+					organization?.repositories.map( repo => (
+						<RepositoryPanel key={ repo.fullName } repository={ repo } />
+					))
+				}
+			</div>
 		</div>
 	)
 } 

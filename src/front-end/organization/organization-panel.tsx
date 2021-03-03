@@ -2,23 +2,26 @@ import React, { Component } from 'react';
 import { DataStore } from '../data-store/data-store';
 import { Organization } from './organization';
 import { OrganizationDetails } from './organization-detail';
+import './organization.scss'
 
 interface OrganizationPanelState {
 	organizationName: string
 	organization: Organization
+	error: string
 }
 
 export class OrganizationPanel extends Component<{}, OrganizationPanelState> {
-	constructor( props ) {
+	constructor( props: {} ) {
 		super( props )
 		this.state = {
 			organization: undefined,
-			organizationName: ''
+			organizationName: 'facebook',
+			error: ''
 		}
 	}
 
 	render() {
-		const { organizationName, organization } = this.state
+		const { organizationName, organization, error } = this.state
 
 		return (
 			<div className="organization-panel">
@@ -31,7 +34,10 @@ export class OrganizationPanel extends Component<{}, OrganizationPanelState> {
 				
 				<button onClick={ ()=>this.getRepos() }>Find</button>
 
-				<OrganizationDetails organization={ organization }/>
+				{ error === ''
+					?	<OrganizationDetails organization={ organization }/>
+					: <p className="error">{ error }</p>
+				}
 				
 			</div>
 		)
@@ -42,9 +48,17 @@ export class OrganizationPanel extends Component<{}, OrganizationPanelState> {
 	}
 
 	private async getRepos() {
-		const organization = await DataStore.instance.getOrganization( this.state.organizationName )
+		try {
+			const organization = await DataStore.instance.getOrganization( this.state.organizationName )
 
-		this.setState({ organization })
+			this.setState({ 
+				organization,
+				error: ''
+			})
+		}
+		catch( error ) {
+			this.setState({ error: error.message })
+		}
 	}
 
 }
