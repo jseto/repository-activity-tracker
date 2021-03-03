@@ -29,6 +29,10 @@ export class InfiniteScroll extends Component<InfiniteScrollProps> {
 		this._intersectionObserver.observe( this._bottomGuard.current )
 	}
 
+	componentWillUnmount() {
+		this._intersectionObserver.disconnect()
+	}
+
 	render() {
 		const { children } = this.props
 
@@ -86,6 +90,10 @@ class RemoveOnHide extends Component<{}, RemoveOnHideState> {
       minHeight: `${this._ref.current.offsetHeight}px`
     })
   }
+
+	componentWillUnmount() {
+		this._intersectionObserver.disconnect()
+	}
 
   render() {
     const { children } = this.props
