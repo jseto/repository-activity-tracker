@@ -1,4 +1,4 @@
-import React, { Component, createRef, ReactElement, RefObject } from 'react'
+import React, { Children, Component, createRef, ReactElement, RefObject } from 'react'
 
 interface InfiniteScrollProps {
 	children: ReactElement | ReactElement[]
@@ -19,7 +19,6 @@ export class InfiniteScroll extends Component<InfiniteScrollProps> {
 			const { onBottomReached } = this.props
 
 			if ( entry.isIntersecting && onBottomReached) {
-				console.log( 'bottom' )
 				onBottomReached()
 			}
 
@@ -37,8 +36,8 @@ export class InfiniteScroll extends Component<InfiniteScrollProps> {
 			<div className="infinite-scroll" ref={ this._domElement }>
 
 				{ 
-					React.Children.map( children, child => 
-						<RemoveOnHide>{child}</RemoveOnHide> 
+					Children.toArray( children ).map( ( child, i ) => 
+						<RemoveOnHide key={ i }>{child}</RemoveOnHide> 
 					)
 				}
 
