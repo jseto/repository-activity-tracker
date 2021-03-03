@@ -2,6 +2,7 @@ import React, { Children, Component, createRef, ReactElement, RefObject } from '
 
 interface InfiniteScrollProps {
 	children: ReactElement | ReactElement[]
+	bottomGuardLabel?: string
 	onBottomReached?: ()=>Promise<unknown>
 }
 
@@ -34,7 +35,7 @@ export class InfiniteScroll extends Component<InfiniteScrollProps> {
 	}
 
 	render() {
-		const { children } = this.props
+		const { children, bottomGuardLabel } = this.props
 
 		return (
 			<div className="infinite-scroll" ref={ this._domElement }>
@@ -45,7 +46,7 @@ export class InfiniteScroll extends Component<InfiniteScrollProps> {
 					)
 				}
 
-				<div ref={ this._bottomGuard }>Bottom</div>
+				<div ref={ this._bottomGuard }>{ bottomGuardLabel || 'Last Element' }</div>
 			</div>
 		)
 	}
@@ -56,7 +57,6 @@ export class InfiniteScroll extends Component<InfiniteScrollProps> {
 }
 
 interface RemoveOnHideState {
-	minHeight: string,
 	isVisible: boolean 
 }
 
@@ -67,7 +67,6 @@ class RemoveOnHide extends Component<{}, RemoveOnHideState> {
     this._ref = React.createRef()
 
     this.state = {
-			minHeight: '',
       isVisible: true
     }
   }
@@ -85,10 +84,6 @@ class RemoveOnHide extends Component<{}, RemoveOnHideState> {
     })
 
     this._intersectionObserver.observe( this._ref.current)
-
-    this.setState({
-      minHeight: `${this._ref.current.offsetHeight}px`
-    })
   }
 
 	componentWillUnmount() {
@@ -98,10 +93,7 @@ class RemoveOnHide extends Component<{}, RemoveOnHideState> {
   render() {
     const { children } = this.props
     return (
-      <div
-        style={{ minHeight: this.state.minHeight }}
-        ref={this._ref}
-      >
+      <div ref={this._ref}>
         {this.state.isVisible && children}
       </div>
     )
