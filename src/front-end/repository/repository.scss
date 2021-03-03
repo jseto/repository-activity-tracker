@@ -3,15 +3,34 @@ $modal-close-button-color:white;
 @import "../main.scss";
 
 .repository-panel {
-	width: 25%;
+	width: 18%;
 	background-color: cadetblue;
 	padding: 1em;
-	margin: 0.5em;
+	margin: 0.5em 0;
+	cursor: pointer;
+
+	a {
+		color: blue;
+	}
 
 	.repository-details {
-		color: white;
 		padding: 1em;
 		margin: 0.5em;
+		cursor: default;
+		max-height: 100%;
+		
+		.commit-container {
+			color: white;
+			background-color: cadetblue;
+			padding: 2em;
+		}
+
+		.commit-list {
+			background-color: #3d6769;
+			height: 60%;
+			overflow: hidden;
+			overflow-y: auto;
+		}
 
 		.commit-panel {
 			padding: 1em;

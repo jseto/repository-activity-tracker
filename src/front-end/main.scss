@@ -4,7 +4,7 @@ $modal-background-color-darker: #151712ed !default;
 $modal-z-index: 40 !default;
 $modal-close-button-size: 2em;
 $modal-close-button-weight: 4px;
-$modal-close-button-color: #3a3a3a;
+$modal-close-button-color: #3a3a3a !default;
 
 .modal {
   // display: flex;
@@ -37,7 +37,8 @@ $modal-close-button-color: #3a3a3a;
     height: $modal-close-button-size;
     border: unset;
     background-color: unset;
-    opacity: 0.5;
+    opacity: 0.75;
+		cursor: pointer;
 
     &:hover {
       opacity: 1;

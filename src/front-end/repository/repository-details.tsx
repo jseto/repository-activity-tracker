@@ -35,18 +35,21 @@ export class RepositoryDetails extends Component<RepositoryDetailsProps, Reposit
 			<div className="repository-details modal-container">
 				<div className="commit-container modal full-screen darker">
 					<RepositoryHeader repository={ repository } />
-					<InfiniteScroll 
-						onBottomReached={ ()=>this.nextPage() } 
-						bottomGuardLabel="First Commit" 
-					>
-							{
-								commits?.map( commit => (
-									<div key={ commit.sha } className="commit-panel">
-										{ commit.message }
-									</div>
-								))
-							}
-					</InfiniteScroll>
+					<h3>Commits:</h3>
+					<div className="commit-list">
+						<InfiniteScroll 
+							onBottomReached={ ()=>this.nextPage() } 
+							bottomGuardLabel="First Commit" 
+						>
+								{
+									commits?.map( commit => (
+										<div key={ commit.sha } className="commit-panel">
+											{ commit.message }
+										</div>
+									))
+								}
+						</InfiniteScroll>
+					</div>
 					<button className="close-modal"
 						onClick={ ()=> onCloseModal && onCloseModal() }
 					>

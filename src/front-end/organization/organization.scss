@@ -1,11 +1,21 @@
 .organization-panel {
 
 	.organization-details {
+		padding: 2em;
 
 		.repository-list {
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: space-evenly;
+		}
+
+		img {
+			display: inline-block;
+			max-width: 5em;
+		}
+
+		h2 {
+			display: inline-block;
 		}
 
 	}

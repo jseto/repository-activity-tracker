@@ -32,7 +32,10 @@ export class RepositoryPanel extends Component<RepositoryPanelProps, RepositoryP
 							repository={ repository } 
 							onCloseModal={ ()=> this.setState(()=>({ showDetails: false })) }
 						/>
-					: <RepositoryHeader repository={ repository } />
+					: <div>
+							<RepositoryHeader repository={ repository } />
+							<a>More...</a>
+						</div>
 				}
 			</div>
 		)
