@@ -63,7 +63,14 @@ export class GithubStore extends GenericDataStore {
 			headers: { "Accept": "application/vnd.github.v3+json" }
 		})
 
-		return resp.json()
+		const result = resp.json()
+
+		if ( !resp.ok ) {
+			const error = await( result )
+			throw new Error( error.message )
+		}
+
+		return result
 	}
 
 	private createOrganizationFromGithub( githubObj: GithubObject ): Organization {
@@ -102,9 +109,12 @@ export class GithubStore extends GenericDataStore {
 		commit.url = githubObj.home_url
 		commit.message = githubObj.commit.message
 		commit.author = new User()
-		commit.author.name = githubObj.author.login
-		commit.author.avatar = githubObj.author.avatar_url
-		commit.author.reposUrl = githubObj.author.repos_url
+
+		const commitAuthor = githubObj.commiter || githubObj.author
+
+		commit.author.name = commitAuthor?.login
+		commit.author.avatar = commitAuthor?.avatar_url
+		commit.author.reposUrl = commitAuthor?.repos_url
 
 		return commit
 	}
