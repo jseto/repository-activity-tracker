@@ -1,3 +1,4 @@
+import { Cookie } from '../../libs/cookies/cookies';
 import { Commit } from '../commit/commit';
 import { Organization } from '../organization/organization';
 import { Repository } from '../repository/repository';
@@ -59,8 +60,13 @@ export class GithubStore extends GenericDataStore {
 	}
 
 	private async apiCall( endPoint: string ) {
+		const apiKey = Cookie.get('repository-activity-tracker-api')
+
 		const resp = await fetch( `${ GithubStore.endPoint }${ endPoint }`, {
-			headers: { "Accept": "application/vnd.github.v3+json" }
+			headers: { 
+				"Accept": "application/vnd.github.v3+json",
+				"Authorization": apiKey && "token " + apiKey
+			}
 		})
 
 		const result = resp.json()
