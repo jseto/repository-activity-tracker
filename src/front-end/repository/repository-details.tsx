@@ -29,23 +29,29 @@ export class RepositoryDetails extends Component<RepositoryDetailsProps, Reposit
 
 	render() {
 		const { commits } = this.state
-		const { onCloseModal } = this.props
+		const { onCloseModal, repository } = this.props
 
 		return (
 			<div className="repository-details modal-container">
-				<InfiniteScroll onBottomReached={ ()=>this.nextPage() }>
-					<div className="commit-container modal full-screen darker">
-						{
-							commits?.map( commit => (
-								<div key={ commit.sha }>{ commit.message }</div>
-							))
-						}
-						<button className="close-modal"
-							onClick={ ()=> onCloseModal && onCloseModal() }
-						>
-						</button>
-					</div>
-				</InfiniteScroll>
+				<div className="commit-container modal full-screen darker">
+					<RepositoryHeader repository={ repository } />
+					<InfiniteScroll 
+						onBottomReached={ ()=>this.nextPage() } 
+						bottomGuardLabel="First Commit" 
+					>
+							{
+								commits?.map( commit => (
+									<div key={ commit.sha } className="commit-panel">
+										{ commit.message }
+									</div>
+								))
+							}
+					</InfiniteScroll>
+					<button className="close-modal"
+						onClick={ ()=> onCloseModal && onCloseModal() }
+					>
+					</button>
+				</div>
 			</div>
 		)
 	} 
@@ -62,4 +68,16 @@ export class RepositoryDetails extends Component<RepositoryDetailsProps, Reposit
 	}
 
 	private currentPage: number = 1
+}
+
+
+export function RepositoryHeader({ repository }) {
+	return (
+		<div className="repository-header">
+			<h3>{ repository?.name }</h3>
+			<strong>{ repository.fullName }</strong>
+			<p>{ repository?.description }</p>
+			<p>Watchers: { repository.watchers}</p>
+		</div>
+	)
 }

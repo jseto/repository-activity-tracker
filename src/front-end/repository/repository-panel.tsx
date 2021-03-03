@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Repository } from './repository';
-import { RepositoryDetails } from './repository-details';
+import { RepositoryDetails, RepositoryHeader } from './repository-details';
 import './repository.scss'
 
 interface RepositoryPanelProps {
@@ -27,15 +27,12 @@ export class RepositoryPanel extends Component<RepositoryPanelProps, RepositoryP
 			<div className="repository-panel"
 				onClick={ () => !showDetails && this.setState({ showDetails: true }) }
 			>
-				<h3>{ repository?.name }</h3>
-				<strong>{ repository.fullName }</strong>
-				<p>{ repository?.description }</p>
-				<p>Watchers: { repository.watchers}</p>
-				{ showDetails &&
-					<RepositoryDetails 
-						repository={ repository } 
-						onCloseModal={ ()=> this.setState(()=>({ showDetails: false })) }
-					/>
+				{ showDetails
+					? <RepositoryDetails 
+							repository={ repository } 
+							onCloseModal={ ()=> this.setState(()=>({ showDetails: false })) }
+						/>
+					: <RepositoryHeader repository={ repository } />
 				}
 			</div>
 		)
