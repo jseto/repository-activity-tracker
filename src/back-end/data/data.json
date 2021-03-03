@@ -8,5 +8,10 @@
     "name": "mysql-5.6",
     "description": "Facebook's branch of the Oracle MySQL v5.6 database. This includes MyRocks.",
     "lastTrackedDate": "2021-03-03T23:23:11.091Z"
+  },
+  "jest": {
+    "name": "jest",
+    "description": "Delightful JavaScript Testing.",
+    "lastTrackedDate": "2021-03-03T23:36:00.347Z"
   }
 }
